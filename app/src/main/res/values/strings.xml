@@ -7,4 +7,6 @@
 
     <!-- Content Descriptions -->
     <string name="content_desc_films">Films</string>
+    <string name="content_desc_poster">Poster</string>
+
 </resources>
