@@ -4,4 +4,7 @@
     <!-- Titles -->
     <string name="title_now_showing">Now showing</string>
     <string name="title_upcoming">Upcoming</string>
+
+    <!-- Content Descriptions -->
+    <string name="content_desc_films">Films</string>
 </resources>
