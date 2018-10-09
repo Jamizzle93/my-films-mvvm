@@ -1,9 +1,12 @@
 package com.mysticwater.myfilms;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupToolbar();
+
+        setupBottomNavigationView();
     }
 
     private void setupToolbar() {
@@ -23,6 +28,23 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(R.string.app_name);
         }
+    }
+
+    private void setupBottomNavigationView() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_bottom);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_now_showing:
+                        return true;
+                    case R.id.menu_upcoming:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
 }
