@@ -19,4 +19,27 @@ public class Film {
         this.voteCount = voteCount;
     }
 
+    public long getId() {
+        return this.id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
 }
