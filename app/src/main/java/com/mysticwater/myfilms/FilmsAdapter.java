@@ -48,13 +48,14 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> 
         double filmVoteAverage = film.getVoteAverage();
         if (filmVoteAverage > 0) {
             filmVoteAverageText = String.valueOf(filmVoteAverage);
+            viewHolder.ratingBar.setRating((float)filmVoteAverage);
         }
         viewHolder.voteAverage.setText(filmVoteAverageText);
 
         String filmVoteCountText = "";
         int filmVoteCount = film.getVoteCount();
         if (filmVoteCount > 0) {
-            filmVoteCountText = String.valueOf(filmVoteAverage);
+            filmVoteCountText = String.valueOf(filmVoteCount);
         }
         viewHolder.voteCount.setText(filmVoteCountText);
 
