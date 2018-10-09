@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,18 +37,27 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.menu_now_showing:
-                        FilmsFragment filmsFragment = FilmsFragment.newInstance();
-                        showFragment(filmsFragment);
-                        return true;
-                    case R.id.menu_upcoming:
-                        return true;
-                    default:
-                        return false;
-                }
+                selectBottomNavigationMenuItem(menuItem);
+                return true;
             }
         });
+
+        Menu navigationMenu = bottomNavigationView.getMenu();
+        selectBottomNavigationMenuItem(navigationMenu.getItem(0));
+    }
+
+    private void selectBottomNavigationMenuItem(MenuItem menuItem) {
+        menuItem.setChecked(true);
+
+        switch (menuItem.getItemId()) {
+            case R.id.menu_now_showing:
+                FilmsFragment filmsFragment = FilmsFragment.newInstance();
+                showFragment(filmsFragment);
+            case R.id.menu_upcoming:
+                break;
+            default:
+                break;
+        }
     }
 
     private void showFragment(Fragment fragment) {
