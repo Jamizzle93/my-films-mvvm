@@ -1,80 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <ImageView
-        android:id="@+id/image_poster"
+    <data>
+
+        <variable
+            name="film"
+            type="com.mysticwater.myfilms.Film"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/content_desc_poster"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_title"
-        style="@style/style_title_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_poster"
-        app:layout_constraintEnd_toEndOf="@+id/image_poster"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/image_poster"
-        tools:text="Star Wars: The Force Awakens"/>
+        <ImageView
+            android:id="@+id/image_poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/content_desc_poster"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <TextView
-        android:id="@+id/text_vote_average"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/text_title"
-        app:layout_constraintTop_toBottomOf="@+id/image_poster"
-        tools:text="4.3"/>
+        <TextView
+            android:id="@+id/text_title"
+            style="@style/style_title_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@{film.title}"
+            app:layout_constraintBottom_toBottomOf="@+id/image_poster"
+            app:layout_constraintEnd_toEndOf="@+id/image_poster"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/image_poster"
+            tools:text="Star Wars: The Force Awakens"/>
 
-    <android.support.v7.widget.AppCompatRatingBar
-        android:id="@+id/rating_bar_vote"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:numStars="5"
-        android:stepSize="0.1"
-        app:layout_constraintBottom_toBottomOf="@+id/text_vote_average"
-        app:layout_constraintStart_toEndOf="@+id/text_vote_average"
-        app:layout_constraintTop_toTopOf="@+id/text_vote_average"/>
+        <TextView
+            android:id="@+id/text_vote_average"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{Double.toString(film.voteAverage)}"
+            app:layout_constraintStart_toStartOf="@+id/text_title"
+            app:layout_constraintTop_toBottomOf="@+id/image_poster"
+            tools:text=""/>
 
-    <TextView
-        android:id="@+id/text_vote_count"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/text_vote_average"
-        app:layout_constraintStart_toEndOf="@+id/rating_bar_vote"
-        app:layout_constraintTop_toTopOf="@+id/text_vote_average"
-        tools:text="10000 votes"/>
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_bar_vote"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:numStars="5"
+            android:rating="@{(float)film.voteAverage}"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="@+id/text_vote_average"
+            app:layout_constraintStart_toEndOf="@+id/text_vote_average"
+            app:layout_constraintTop_toTopOf="@+id/text_vote_average"/>
 
-    <TextView
-        android:id="@+id/text_release_date"
-        style="@style/style_body"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="#616161"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/text_title"
-        app:layout_constraintTop_toBottomOf="@+id/text_vote_average"
-        tools:text="22/01/2017"/>
+        <TextView
+            android:id="@+id/text_vote_count"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{Integer.toString(film.voteCount)}"
+            app:layout_constraintBottom_toBottomOf="@+id/text_vote_average"
+            app:layout_constraintStart_toEndOf="@+id/rating_bar_vote"
+            app:layout_constraintTop_toTopOf="@+id/text_vote_average"
+            tools:text="10000 votes"/>
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_release_date"
+            style="@style/style_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{film.releaseDate}"
+            android:textColor="#616161"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/text_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_vote_average"
+            tools:text="22/01/2017"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
