@@ -7,14 +7,15 @@ import android.view.ViewGroup;
 
 import com.mysticwater.myfilms.databinding.ViewRowFilmBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> {
 
     private List<Film> films;
 
-    FilmsAdapter(List<Film> films) {
-        this.films = films;
+    FilmsAdapter() {
+        this.films = new ArrayList<>();
     }
 
     @NonNull
