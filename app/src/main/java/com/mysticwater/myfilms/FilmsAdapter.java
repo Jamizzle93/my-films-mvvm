@@ -40,6 +40,11 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> 
         return films != null ? films.size() : 0;
     }
 
+    public void setData(List<Film> films) {
+        this.films = films;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ViewRowFilmBinding binding;
