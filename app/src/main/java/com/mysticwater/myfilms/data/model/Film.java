@@ -1,4 +1,4 @@
-package com.mysticwater.myfilms;
+package com.mysticwater.myfilms.data.model;
 
 public class Film {
 

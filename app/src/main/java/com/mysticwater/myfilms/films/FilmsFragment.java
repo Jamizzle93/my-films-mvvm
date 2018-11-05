@@ -1,4 +1,4 @@
-package com.mysticwater.myfilms;
+package com.mysticwater.myfilms.films;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mysticwater.myfilms.R;
+import com.mysticwater.myfilms.adapters.FilmsAdapter;
 import com.mysticwater.myfilms.databinding.FragmentFilmsBinding;
 
 public class FilmsFragment extends Fragment {

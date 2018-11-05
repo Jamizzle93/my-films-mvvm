@@ -2,6 +2,8 @@ package com.mysticwater.myfilms;
 
 import android.app.Application;
 
+import com.mysticwater.myfilms.data.FilmsRepository;
+
 public class FilmsApplication extends Application {
 
     @Override

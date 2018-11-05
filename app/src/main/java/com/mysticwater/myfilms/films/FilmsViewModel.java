@@ -1,9 +1,12 @@
-package com.mysticwater.myfilms;
+package com.mysticwater.myfilms.films;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+
+import com.mysticwater.myfilms.FilmsApplication;
+import com.mysticwater.myfilms.data.model.Film;
 
 import java.util.List;
 

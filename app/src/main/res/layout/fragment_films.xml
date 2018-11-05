@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.mysticwater.myfilms.FilmsViewModel"/>
+            type="com.mysticwater.myfilms.films.FilmsViewModel"/>
 
     </data>
 

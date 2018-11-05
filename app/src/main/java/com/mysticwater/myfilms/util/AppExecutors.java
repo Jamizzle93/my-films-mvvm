@@ -1,4 +1,4 @@
-package com.mysticwater.myfilms;
+package com.mysticwater.myfilms.util;
 
 import android.os.Handler;
 import android.os.Looper;

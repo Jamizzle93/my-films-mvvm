@@ -1,4 +1,4 @@
-package com.mysticwater.myfilms;
+package com.mysticwater.myfilms.util;
 
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
