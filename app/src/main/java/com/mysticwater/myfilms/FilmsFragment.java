@@ -1,5 +1,6 @@
 package com.mysticwater.myfilms;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.mysticwater.myfilms.databinding.FragmentFilmsBinding;
 
 public class FilmsFragment extends Fragment {
 
+    private FilmsViewModel filmsViewModel;
     private FragmentFilmsBinding fragmentFilmsBinding;
 
     public FilmsFragment() {
@@ -32,6 +32,8 @@ public class FilmsFragment extends Fragment {
 
         View rootView = fragmentFilmsBinding.getRoot();
 
+        filmsViewModel = ViewModelProviders.of(this).get(FilmsViewModel.class);
+        fragmentFilmsBinding.setViewmodel(filmsViewModel);
 
         setupFilmsRecyclerView(rootView);
 
@@ -42,14 +44,11 @@ public class FilmsFragment extends Fragment {
         RecyclerView filmsRecyclerView = rootView.findViewById(R.id.recycler_view_films);
         filmsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<Film> films = new ArrayList();
-        Film testFilm = new Film(1, "Film Title", "01/01/1970", "", 2.5, 2);
-        films.add(testFilm);
-        FilmsAdapter adapter = new FilmsAdapter(films);
-
+        FilmsAdapter adapter = new FilmsAdapter();
         filmsRecyclerView.setAdapter(adapter);
-    }
 
+        filmsViewModel.getFilms().observe(this, adapter::setData);
+    }
 
 
 }
