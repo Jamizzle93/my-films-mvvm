@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.mysticwater.myfilms.databinding.FragmentFilmsBinding;
 
 public class FilmsFragment extends Fragment {
+
+    private FragmentFilmsBinding fragmentFilmsBinding;
 
     public FilmsFragment() {
     }
@@ -25,8 +28,10 @@ public class FilmsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fragmentFilmsBinding = FragmentFilmsBinding.inflate(inflater, container, false);
 
-        View rootView = inflater.inflate(R.layout.fragment_films, null);
+        View rootView = fragmentFilmsBinding.getRoot();
+
 
         setupFilmsRecyclerView(rootView);
 
