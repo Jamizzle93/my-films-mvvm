@@ -1,12 +1,25 @@
 package com.mysticwater.myfilms.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Film {
 
+    @SerializedName("id")
     private long id;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("release_date")
     private String releaseDate;
+
+    @SerializedName("backdrop_path")
     private String posterPath;
+
+    @SerializedName("vote_average")
     private double voteAverage;
+
+    @SerializedName("vote_count")
     private int voteCount;
 
     public Film(long id, String title, String releaseDate, String posterPath, double voteAverage,
