@@ -3,19 +3,26 @@ package com.mysticwater.myfilms.data;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 
-
 import com.mysticwater.myfilms.data.model.Film;
+import com.mysticwater.myfilms.data.model.FilmResults;
+import com.mysticwater.myfilms.network.TheMovieDbService;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FilmsRepository {
 
     private volatile static FilmsRepository INSTANCE = null;
 
+    private TheMovieDbService theMovieDbService;
+
     private MediatorLiveData<List<Film>> observableFilms;
 
     private FilmsRepository() {
+        theMovieDbService = TheMovieDbService.Creator.newMovieService();
     }
 
     public static FilmsRepository getInstance() {
@@ -30,19 +37,24 @@ public class FilmsRepository {
 
     public LiveData<List<Film>> getFilms() {
         observableFilms = new MediatorLiveData<>();
-        loadFilms();
+
+        theMovieDbService.getUpcomingFilms().enqueue(new Callback<FilmResults>() {
+            @Override
+            public void onResponse(Call<FilmResults> call, Response<FilmResults> response) {
+                if (response.isSuccessful()) {
+                    FilmResults filmResults = response.body();
+
+                    observableFilms.setValue(filmResults.getResults());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FilmResults> call, Throwable t) {
+                observableFilms.setValue(null);
+            }
+        });
 
         return observableFilms;
-    }
-
-    private void loadFilms() {
-        List<Film> films = new ArrayList();
-        Film testFilm = new Film(1, "Film Title", "01/01/1970", "https://image.tmdb.org/t/p/w1280/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg", 2.5, 2);
-        Film testFilmTwo = new Film(2, "Film Title Two", "02/02/1972", "https://image.tmdb.org/t/p/w1280/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg", 4.25, 20);
-        films.add(testFilm);
-        films.add(testFilmTwo);
-
-        observableFilms.setValue(films);
     }
 
 }
