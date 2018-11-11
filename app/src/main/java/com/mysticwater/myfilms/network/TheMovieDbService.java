@@ -1,11 +1,7 @@
 package com.mysticwater.myfilms.network;
 
-import com.mysticwater.myfilms.data.model.Film;
 import com.mysticwater.myfilms.data.model.FilmResults;
 
-import java.util.List;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;

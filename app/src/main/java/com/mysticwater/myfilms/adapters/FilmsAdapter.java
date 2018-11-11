@@ -5,8 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.mysticwater.myfilms.databinding.ViewRowFilmBinding;
 import com.mysticwater.myfilms.data.model.Film;
+import com.mysticwater.myfilms.databinding.ViewRowFilmBinding;
 
 import java.util.ArrayList;
 import java.util.List;
