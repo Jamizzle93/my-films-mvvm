@@ -15,7 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface TheMovieDbService {
-    @GET("discover/movie?3|2")
+    @GET("discover/movie?")
     Call<FilmResults> getUpcomingFilms(
             @Query("with_release_type") String releaseType,
             @Query("primary_release_date.gte") String startDate,
