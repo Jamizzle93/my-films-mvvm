@@ -84,7 +84,7 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{film.releaseDate}"
+            android:text="@{film.getReleaseDateString()}"
             android:textColor="#616161"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

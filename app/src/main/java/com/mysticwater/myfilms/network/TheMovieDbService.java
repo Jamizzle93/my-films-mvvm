@@ -18,9 +18,13 @@ public interface TheMovieDbService {
                     .addInterceptor(new TheMovieDbAuthInterceptor())
                     .build();
 
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Calendar.class, new GsonCalendarDeserializer())
+                    .create();
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://api.themoviedb.org/3/")
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(client)
                     .build();
             return retrofit.create(TheMovieDbService.class);
