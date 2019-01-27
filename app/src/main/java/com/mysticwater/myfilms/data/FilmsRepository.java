@@ -2,11 +2,16 @@ package com.mysticwater.myfilms.data;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.text.TextUtils;
 
 import com.mysticwater.myfilms.data.model.Film;
 import com.mysticwater.myfilms.data.model.FilmResults;
 import com.mysticwater.myfilms.network.TheMovieDbService;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,21 +43,39 @@ public class FilmsRepository {
     public LiveData<List<Film>> getFilms() {
         observableFilms = new MediatorLiveData<>();
 
-        theMovieDbService.getUpcomingFilms().enqueue(new Callback<FilmResults>() {
-            @Override
-            public void onResponse(Call<FilmResults> call, Response<FilmResults> response) {
-                if (response.isSuccessful()) {
-                    FilmResults filmResults = response.body();
+        Calendar now = Calendar.getInstance();
+        Calendar twoWeeks = Calendar.getInstance();
+        twoWeeks.add(Calendar.DATE, 14);
 
-                    observableFilms.setValue(filmResults.getResults());
-                }
-            }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String nowStr = format.format(now.getTime());
+        String twoWeeksStr = format.format(twoWeeks.getTime());
 
-            @Override
-            public void onFailure(Call<FilmResults> call, Throwable t) {
-                observableFilms.setValue(null);
-            }
-        });
+        String releaseType = "3|2|1";
+
+        theMovieDbService.getUpcomingFilms(releaseType, nowStr, twoWeeksStr).enqueue(
+                new Callback<FilmResults>() {
+                    @Override
+                    public void onResponse(Call<FilmResults> call, Response<FilmResults> response) {
+                        if (response.isSuccessful()) {
+                            FilmResults filmResults = response.body();
+
+                            List<Film> filmsToShow = new ArrayList<>();
+                            for (Film film : filmResults.getResults()) {
+                                if (!TextUtils.isEmpty(film.getPosterPath())) {
+                                    filmsToShow.add(film);
+                                }
+                            }
+                            Collections.sort(filmsToShow);
+                            observableFilms.setValue(filmsToShow);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FilmResults> call, Throwable t) {
+                        observableFilms.setValue(null);
+                    }
+                });
 
         return observableFilms;
     }
