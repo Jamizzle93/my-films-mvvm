@@ -6,27 +6,24 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 
 import com.mysticwater.myfilms.FilmsApplication;
+import com.mysticwater.myfilms.data.FilmsRepository;
 import com.mysticwater.myfilms.data.model.Film;
 
 import java.util.List;
 
 public class FilmsViewModel extends AndroidViewModel {
 
-    public final MediatorLiveData<List<Film>> observableFilms;
+    private LiveData<List<Film>> mAllFilms;
 
     public FilmsViewModel(Application application) {
         super(application);
 
-        observableFilms = new MediatorLiveData<>();
-        observableFilms.setValue(null);
-
         FilmsApplication filmsApplication = (FilmsApplication) application;
-        LiveData<List<Film>> films = filmsApplication.getFilmsRepository().getFilms();
-
-        observableFilms.addSource(films, observableFilms::setValue);
+        FilmsRepository filmsRepository = filmsApplication.getFilmsRepository();
+        mAllFilms = filmsRepository.getFilms();
     }
 
-    public LiveData<List<Film>> getFilms() {
-        return observableFilms;
+    LiveData<List<Film>> getFilms() {
+        return mAllFilms;
     }
 }
