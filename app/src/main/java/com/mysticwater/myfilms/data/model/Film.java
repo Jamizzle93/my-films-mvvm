@@ -18,7 +18,7 @@ public class Film implements Comparable<Film> {
     @SerializedName("release_date")
     private Calendar releaseDate;
 
-    @SerializedName("backdrop_path")
+    @SerializedName("poster_path")
     private String posterPath;
 
     @SerializedName("vote_average")
