@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +48,7 @@ public class FilmsRepository {
         Calendar twoWeeks = Calendar.getInstance();
         twoWeeks.add(Calendar.DATE, 14);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String nowStr = format.format(now.getTime());
         String twoWeeksStr = format.format(twoWeeks.getTime());
 
